@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Deal } from '../../models/deal.model';
-import { loadDealsSuccess, setNameFilter, setPriceFilter, resetFilters } from '../actions/deals.actions';
+import { loadDealsSuccess, addDeal, setNameFilter, setPriceFilter, resetFilters } from '../actions/deals.actions';
 
 
 export interface DealsState {
@@ -20,6 +20,10 @@ export const dealsReducer = createReducer(
   on(loadDealsSuccess, (state, { deals }) => ({
     ...state,
     deals: deals.map((d) => ({ ...d, capRate: (d.noi / d.purchasePrice) * 100 })),
+  })),
+  on(addDeal, (state, { deal }) => ({
+    ...state,
+    deals: [...state.deals, { ...deal, capRate: (deal.noi / deal.purchasePrice) * 100 }],
   })),
   on(setNameFilter, (state, { name }) => ({ ...state, nameFilter: name })),
   on(setPriceFilter, (state, { value, operator }) => ({ ...state, priceFilter: { value, operator } })),

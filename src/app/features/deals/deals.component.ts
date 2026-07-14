@@ -11,10 +11,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialog } from '@angular/material/dialog';
 import { Deal } from '../../models/deal.model';
 import { loadDeals, resetFilters, setNameFilter, setPriceFilter } from '../../store/actions/deals.actions';
 import { selectFilteredDeals } from '../../store/selector/deals.selector';
 import { HeaderComponent } from '../../shared/components/header/header.component';
+import { AddDealDialogComponent } from '../../shared/components/add-deal-dialog/add-deal-dialog.component';
 
 @Component({
   selector: 'app-deals',
@@ -39,6 +41,7 @@ export class DealsComponent implements OnInit {
   private store = inject(Store);
   private fb = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
+  private dialog = inject(MatDialog);
 
   deals$: Observable<Deal[]> = this.store.select(selectFilteredDeals);
   displayedColumns = ['name', 'purchasePrice', 'address', 'noi', 'capRate'];
@@ -69,6 +72,12 @@ export class DealsComponent implements OnInit {
     this.store.dispatch(resetFilters());
     this.nameFilter.reset('');
     this.priceForm.reset({ value: null, operator: 'gt' });
+  }
+
+  openAddDealDialog(): void {
+    this.dialog.open(AddDealDialogComponent, {
+      width: '400px',
+    });
   }
 
 }
