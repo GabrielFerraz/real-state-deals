@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { loginSuccess } from '../../store/actions';
 
@@ -15,7 +16,7 @@ export class AuthComponent {
   showPasswordStep = false;
   submitted = false;
 
-  constructor(private fb: FormBuilder, private store: Store) {
+  constructor(private fb: FormBuilder, private store: Store, private router: Router) {
     this.authForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -35,6 +36,7 @@ export class AuthComponent {
     this.submitted = true;
     if (this.authForm.valid) {
       this.store.dispatch(loginSuccess());
+      this.router.navigate(['/deals']);
     }
   }
 }
