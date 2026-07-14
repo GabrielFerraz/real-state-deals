@@ -71,7 +71,7 @@
       </ng-container>
 
       <ng-container matColumnDef="noi">
-        <mat-header-cell *matHeaderCellDef class="font-semibold text-gray-600">NOI ($)</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef class="font-semibold text-gray-600"><span matTooltip="Net Operating Income">NOI ($)</span></mat-header-cell>
         <mat-cell *matCellDef="let deal">{{ deal.noi | number }}</mat-cell>
       </ng-container>
 

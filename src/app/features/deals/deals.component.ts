@@ -17,6 +17,7 @@ import { loadDeals, resetFilters, setNameFilter, setPriceFilter } from '../../st
 import { selectFilteredDeals } from '../../store/selector/deals.selector';
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { AddDealDialogComponent } from '../../shared/components/add-deal-dialog/add-deal-dialog.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-deals',
@@ -32,6 +33,7 @@ import { AddDealDialogComponent } from '../../shared/components/add-deal-dialog/
     MatFormFieldModule,
     MatSelectModule,
     MatIconModule,
+    MatTooltipModule,
     HeaderComponent,
   ],
   templateUrl: './deals.component.html',
