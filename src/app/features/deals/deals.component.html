@@ -21,8 +21,7 @@
     <div class="flex items-center gap-3 ml-auto">
       <!-- Name search -->
       <mat-form-field appearance="outline" class="w-52" subscriptSizing="dynamic">
-        <mat-label>Search by name</mat-label>
-        <input matInput [formControl]="nameFilter" placeholder="Deal name" />
+        <input matInput [formControl]="nameFilter" placeholder="Search by name" />
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
 
@@ -35,11 +34,11 @@
         <div class="px-4 py-3 flex flex-col gap-3 w-64" (click)="$event.stopPropagation()">
           <p class="text-sm font-medium text-gray-700">Filter by Purchase Price</p>
           <form [formGroup]="priceForm" class="flex flex-col gap-3">
-            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic" floatLabel="always">
               <mat-label>Price ($)</mat-label>
               <input matInput type="number" step="0.01" formControlName="value" placeholder="0.00" min="0" />
             </mat-form-field>
-            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic" floatLabel="always">
               <mat-label>Condition</mat-label>
               <mat-select formControlName="operator">
                 <mat-option value="gt">Greater than</mat-option>

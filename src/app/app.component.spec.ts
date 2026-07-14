@@ -1,10 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { provideLocationMocks } from '@angular/common/testing';
+import { provideRouter } from '@angular/router';
+import { routes } from './app.routes';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
+      providers: [provideRouter(routes), provideLocationMocks()],
     }).compileComponents();
   });
 
@@ -20,10 +24,10 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('real-state-deals');
   });
 
-  it('should render title', () => {
+  it('should render router-outlet', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, real-state-deals');
+    expect(compiled.querySelector('router-outlet')).toBeTruthy();
   });
 });
