@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -7,7 +6,6 @@ import { DealsComponent } from './deals.component';
 import { Deal } from '../../models/deal.model';
 import { selectFilteredDeals } from '../../store/selector/deals.selector';
 import { loadDeals, resetFilters, setNameFilter, setPriceFilter } from '../../store/actions/deals.actions';
-import { logout } from '../../store/actions/auth.actions';
 
 const MOCK_DEALS: Deal[] = [
   { id: 1, name: 'Northeast Pipeline', purchasePrice: 2500000, address: '123 Main St, Boston, MA', noi: 175000, capRate: 7 },
@@ -18,11 +16,8 @@ describe('DealsComponent', () => {
   let component: DealsComponent;
   let fixture: ComponentFixture<DealsComponent>;
   let store: MockStore;
-  let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(async () => {
-    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-
     await TestBed.configureTestingModule({
       imports: [DealsComponent, NoopAnimationsModule],
       providers: [
@@ -32,7 +27,6 @@ describe('DealsComponent', () => {
             auth: { isLoggedIn: true },
           },
         }),
-        { provide: Router, useValue: routerSpy },
       ],
     }).compileComponents();
 
@@ -67,20 +61,6 @@ describe('DealsComponent', () => {
 
     it('should initialize priceForm operator as gt', () => {
       expect(component.priceForm.get('operator')?.value).toBe('gt');
-    });
-  });
-
-  // --- onLogout() ---
-  describe('onLogout()', () => {
-    it('should dispatch logout', () => {
-      const dispatchSpy = spyOn(store, 'dispatch');
-      component.onLogout();
-      expect(dispatchSpy).toHaveBeenCalledWith(logout());
-    });
-
-    it('should navigate to /login', () => {
-      component.onLogout();
-      expect(routerSpy.navigate).toHaveBeenCalledWith(['/login']);
     });
   });
 
@@ -157,11 +137,6 @@ describe('DealsComponent', () => {
 
   // --- Template ---
   describe('template', () => {
-    it('should render the TermSheet header', () => {
-      const header: HTMLElement = fixture.nativeElement.querySelector('header');
-      expect(header?.textContent).toContain('TermSheet');
-    });
-
     it('should render the Deals title', () => {
       const h1: HTMLElement = fixture.nativeElement.querySelector('h1');
       expect(h1?.textContent?.trim()).toBe('Deals');

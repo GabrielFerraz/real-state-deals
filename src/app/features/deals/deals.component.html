@@ -1,19 +1,5 @@
 <div class="flex flex-col h-screen">
-
-  <!-- Header -->
-  <header class="flex items-center justify-between px-6 h-16 bg-[#0f1623] shrink-0">
-    <span class="text-teal-400 font-bold text-xl tracking-wide">TermSheet</span>
-    <button mat-icon-button [matMenuTriggerFor]="profileMenu" aria-label="Profile menu" class="!p-1.5">
-      <mat-icon class="text-pink-400 !text-3xl !w-8 !h-8">account_circle</mat-icon>
-    </button>
-    <mat-menu #profileMenu="matMenu">
-      <button mat-menu-item (click)="onLogout()">
-        <mat-icon>logout</mat-icon>
-        <span>Log out</span>
-      </button>
-    </mat-menu>
-  </header>
-
+    <app-header></app-header>
   <!-- Subheader -->
   <div class="flex items-center justify-between px-6 py-3 border-b border-gray-200 bg-neutral-100 shrink-0 gap-4">
     <h1 class="text-xl font-semibold text-gray-900 shrink-0">Deals</h1>

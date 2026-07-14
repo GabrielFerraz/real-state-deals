@@ -1,7 +1,6 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AsyncPipe, DecimalPipe } from '@angular/common';
@@ -13,9 +12,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Deal } from '../../models/deal.model';
-import { logout } from '../../store/actions/auth.actions';
 import { loadDeals, resetFilters, setNameFilter, setPriceFilter } from '../../store/actions/deals.actions';
 import { selectFilteredDeals } from '../../store/selector/deals.selector';
+import { HeaderComponent } from '../../shared/components/header/header.component';
 
 @Component({
   selector: 'app-deals',
@@ -31,13 +30,13 @@ import { selectFilteredDeals } from '../../store/selector/deals.selector';
     MatFormFieldModule,
     MatSelectModule,
     MatIconModule,
+    HeaderComponent,
   ],
   templateUrl: './deals.component.html',
   styleUrl: './deals.component.scss',
 })
 export class DealsComponent implements OnInit {
   private store = inject(Store);
-  private router = inject(Router);
   private fb = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
 
@@ -70,11 +69,6 @@ export class DealsComponent implements OnInit {
     this.store.dispatch(resetFilters());
     this.nameFilter.reset('');
     this.priceForm.reset({ value: null, operator: 'gt' });
-  }
-
-  onLogout(): void {
-    this.store.dispatch(logout());
-    this.router.navigate(['/login']);
   }
 
 }
