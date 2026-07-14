@@ -1,0 +1,15 @@
+.add-deal-dialog {
+  .full-width {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  mat-dialog-content {
+    padding: 1.5rem 1rem;
+  }
+
+  mat-dialog-actions {
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+}

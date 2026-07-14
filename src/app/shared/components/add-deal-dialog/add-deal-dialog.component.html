@@ -1,0 +1,68 @@
+<div class="add-deal-dialog">
+  <h2 mat-dialog-title>Add New Deal</h2>
+
+  <mat-dialog-content>
+    <form [formGroup]="dealForm">
+      <mat-form-field appearance="outline" class="full-width" floatLabel="always">
+        <mat-label>Deal Name</mat-label>
+        <input matInput formControlName="name" placeholder="Enter deal name" />
+        <mat-error *ngIf="dealForm.get('name')?.hasError('required')">
+          Deal name is required
+        </mat-error>
+        <mat-error *ngIf="dealForm.get('name')?.hasError('minlength')">
+          Deal name must be at least 3 characters
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width" floatLabel="always">
+        <mat-label>Purchase Price</mat-label>
+        <input matInput formControlName="purchasePrice" type="number" placeholder="Enter purchase price" />
+        <mat-error *ngIf="dealForm.get('purchasePrice')?.hasError('required')">
+          Purchase price is required
+        </mat-error>
+        <mat-error *ngIf="dealForm.get('purchasePrice')?.hasError('min')">
+          Purchase price must be greater than 0
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width" floatLabel="always">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" placeholder="Enter property address" />
+        <mat-error *ngIf="dealForm.get('address')?.hasError('required')">
+          Address is required
+        </mat-error>
+        <mat-error *ngIf="dealForm.get('address')?.hasError('minlength')">
+          Address must be at least 5 characters
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width" floatLabel="always">
+        <mat-label>NOI (Net Operating Income)</mat-label>
+        <input matInput formControlName="noi" type="number" placeholder="Enter NOI" />
+        <mat-error *ngIf="dealForm.get('noi')?.hasError('required')">
+          NOI is required
+        </mat-error>
+        <mat-error *ngIf="dealForm.get('noi')?.hasError('min')">
+          NOI must be greater than 0
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width" floatLabel="always">
+        <mat-label>Cap Rate (%)</mat-label>
+        <input matInput [value]="capRate.toFixed(2)" readonly disabled />
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!dealForm.valid"
+      (click)="onSave()"
+    >
+      Save
+    </button>
+  </mat-dialog-actions>
+</div>
